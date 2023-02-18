@@ -1,2 +1,3 @@
 # podman-compose-demo
-Repo for podman-compose yaml files
+
+This repository contains podman-compose sample demo yaml files.
