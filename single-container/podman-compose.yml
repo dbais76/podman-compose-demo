@@ -1,0 +1,10 @@
+## Simple web container created using podman-compose, consuming the default network
+
+services:
+  demo-web:
+    image: quay.io/dbais76/fedora-httpd:1.0  ##image to be used for creating the app container
+    container_name: webapp ## define a custom container name, if not defined, podman will define random name for the container
+    ports:
+      8080:80  ## port binding host_port:container_port
+    restarts:
+      always   ## container restart policy

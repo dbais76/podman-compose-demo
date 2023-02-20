@@ -1,0 +1,41 @@
+services:
+  frontend:
+    image: docker.io/library/wordpress:latest
+    container_name: frontend  
+    ports:
+      8080:80
+    restarts:
+      always
+    networks:
+      - user-nw
+      - db-net  
+    environment:
+      - WORDPRESS_DB_HOST=backend
+      - WORDPRESS_DB_USER=demouser
+      - WORDPRESS_DB_PASSWORD=demopass
+      - WORDPRESS_DB_NAME=demodb
+    depends_on:
+      - backend    
+  backend:
+    image: docker.io/library/mariadb:10.6.4-focal
+    command: '--default-authentication-plugin=mysql_native_password'
+    container_name: backend  
+    volumes:
+      - db-vol:/var/lib/mysql
+    networks:
+      - db-net
+    restarts:
+      always
+    environment:
+      - MYSQL_USER=demouser
+      - MYSQL_PASSWORD=demopass
+      - MYSQL_ROOT_PASSWORD=I@mGr00T
+      - MYSQL_DATABASE=demodb
+    expose:
+      - 3306
+      - 13306
+volumes:
+  db-vol: {}
+networks:
+  user-nw: {}
+  db-net: {}  
