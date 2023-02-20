@@ -21,7 +21,7 @@ services:
     depends_on:  ## defines that frontend container needs backend container up and running and in a way, defines the order
       - backend    
   backend:
-    image: docker.io/library/mariadb:10.6.4-focal
+    image: quay.io/dbais76/mariadb:10.6.4
     command: '--default-authentication-plugin=mysql_native_password'
     container_name: backend  
     volumes:
