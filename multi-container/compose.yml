@@ -1,6 +1,10 @@
+#########################################################################################################################  
+#  This is a compose.yml file to deploy a multi-container application using WordPress and MariaDB as database backend ###
+#  Compose file also creates two networks, one for Frontend app and second to connect between two containers          ###
+########################################################################################################################                
 services:
   frontend:
-    image: docker.io/library/wordpress:latest
+    image: quay.io/dbais76/wordpress:1.0
     container_name: frontend  
     ports:
       8080:80
@@ -14,7 +18,7 @@ services:
       - WORDPRESS_DB_USER=demouser
       - WORDPRESS_DB_PASSWORD=demopass
       - WORDPRESS_DB_NAME=demodb
-    depends_on:
+    depends_on:  ## defines that frontend container needs backend container up and running and in a way, defines the order
       - backend    
   backend:
     image: docker.io/library/mariadb:10.6.4-focal
